@@ -1,11 +1,7 @@
-<script>
-export default {
-    data() {
-        return {
-            dialog: false,
-        };
-    },
-};
+<script setup>
+import { ref } from "vue";
+
+const dialog = ref(0);
 </script>
 
 <template>

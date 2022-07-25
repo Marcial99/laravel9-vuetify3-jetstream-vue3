@@ -1,6 +1,5 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import Welcome from "@/Jetstream/Welcome.vue";
 </script>
 
 <template>
@@ -17,7 +16,6 @@ import Welcome from "@/Jetstream/Welcome.vue";
                         <strong>icon</strong> props instead of
                         <strong>type</strong>
                     </v-alert>
-                    <Welcome />
                 </div>
             </div>
         </div>

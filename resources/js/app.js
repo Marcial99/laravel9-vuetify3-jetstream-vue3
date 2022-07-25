@@ -10,13 +10,20 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
-
+import { aliases, mdi } from "vuetify/iconsets/mdi";
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
 const vuetify = createVuetify({
     components,
     directives,
+    icons: {
+        defaultSet: "mdi",
+        aliases,
+        sets: {
+            mdi,
+        },
+    },
 });
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

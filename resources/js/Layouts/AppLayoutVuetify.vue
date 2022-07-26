@@ -1,67 +1,49 @@
-<script>
+<script setup>
+import { ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import NavigationDrawerLink from "@/Components/NavigationDrawerLink.vue";
+import SubmenuTabLink from "@/Components/SubmenuTabLink.vue";
 
-export default {
-    data() {
-        return {
-            nav: true,
-            items: [
-                { title: "Click Me" },
-                { title: "Click Me" },
-                { title: "Click Me" },
-                { title: "Click Me 2" },
-            ],
-        };
-    },
-    methods: {
-        logout() {
-            Inertia.post(route("logout"), {
-                onSuccess: () => {
-                    location.reload();
-                },
-            });
+const nav = ref(true);
+
+const logout = () => {
+    Inertia.post(route("logout"), {
+        onSuccess: () => {
+            location.reload();
         },
-    },
+    });
 };
 </script>
 <template>
     <!-- App.vue -->
 
     <v-app>
-        <v-navigation-drawer app v-model="nav">
+        <v-navigation-drawer app v-model="nav" color="light">
             <!-- -->
 
-            <v-list>
-                <v-list-item
-                    link
-                    @click="
-                        this.$inertia.visit(route('dashboard'), {
-                            preserveState: true,
-                            preserveScroll: true,
-                        })
-                    "
-                >
-                    <v-list-item-icon icon="mdi-account"> </v-list-item-icon>
-                    <v-list-item-content>Home 1</v-list-item-content>
-                </v-list-item>
-
-                <v-list-item
-                    link
-                    @click="
-                        this.$inertia.visit(route('dashboard2'), {
-                            preserveState: true,
-                            preserveScroll: true,
-                        })
-                    "
-                >
-                    <v-list-item-icon icon="mdi-home"> </v-list-item-icon>
-                    <v-list-item-content>Home 2</v-list-item-content>
-                </v-list-item>
+            <v-list bg-color="light">
+                <NavigationDrawerLink
+                    ruta="dashboard"
+                    icon="mdi-account"
+                    title="Home 1"
+                    color="indigo"
+                />
+                <NavigationDrawerLink
+                    ruta="gas.captura"
+                    icon="mdi-fire"
+                    title="Módulo de gas"
+                    color="indigo"
+                />
+                <NavigationDrawerLink
+                    ruta="dashboard2"
+                    icon="mdi-home"
+                    title="Home 2"
+                    color="indigo"
+                />
             </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar app color="primary">
+        <v-app-bar app color="indigo" dark>
             <!-- -->
             <v-app-bar-nav-icon @click="nav = !nav">
                 <v-icon icon="mdi-menu" />
@@ -69,15 +51,18 @@ export default {
             <v-app-bar-title>
                 <slot name="title"></slot>
             </v-app-bar-title>
+            <template v-slot:extension>
+                <v-tabs>
+                    <slot name="tabs"></slot>
+                </v-tabs>
+            </template>
             <template v-slot:append>
-                <v-menu location="start">
+                <v-menu location="start" bottom offset-y rounded>
                     <template v-slot:activator="{ props }">
-                        <v-btn
-                            color="light"
-                            dark
-                            v-bind="props"
-                            icon="mdi-dots-vertical"
-                        >
+                        <v-btn icon v-bind="props">
+                            <v-avatar color="brown" size="large">
+                                <span class="white--text text-h5">JM</span>
+                            </v-avatar>
                         </v-btn>
                     </template>
 

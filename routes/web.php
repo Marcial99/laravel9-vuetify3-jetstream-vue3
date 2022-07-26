@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GasEmpresasController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +33,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Home');
     })->name('dashboard');
+
+    Route::get('/gas/captura', function () {
+        return Inertia::render('modules/gas/GasCaptura');
+    })->name('gas.captura');
+
+    Route::get('/gas/empresas', [GasEmpresasController::class, 'index'])->name('gas.empresas');
+    Route::post('/gas/empresas/store', [GasEmpresasController::class, 'store'])->name('gas.empresas.store');
 });
 
 Route::get('/dashboard2', function () {
